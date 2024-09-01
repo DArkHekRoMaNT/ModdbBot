@@ -4,10 +4,10 @@ import logging
 import os.path
 import threading
 
-import api
-import discord_bot
-from api.models import *
-import utils
+from .api import api
+from .discord_bot import send_comment
+from .api.models import *
+from .utils import get_datapath
 
 logger = logging.getLogger("subscription")
 
@@ -27,7 +27,7 @@ class SubscribedUser:
 
 class SubscriptionManager:
     def __init__(self):
-        self.filename = utils.get_datapath(subdir="data", filename="subscriptions.json")
+        self.filename = get_datapath(subdir="data", filename="subscriptions.json")
         self.users_lock = threading.Lock()
         self.users = self._load()
         self._save()
@@ -85,7 +85,7 @@ class SubscriptionManager:
                 if user.skip_logs and not self._is_suited(user, comment):
                     continue
 
-                discord_bot.send_comment(user.discord_user_id, comment)
+                send_comment(user.discord_user_id, comment)
         self.users_lock.release()
 
     @staticmethod
