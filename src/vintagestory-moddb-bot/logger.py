@@ -2,7 +2,7 @@ import logging
 from datetime import datetime
 
 import colorlog
-from .utils import get_datapath
+from . import utils
 
 
 def get_console_handler():
@@ -23,7 +23,7 @@ def get_console_handler():
 
 
 def get_file_handler(filename: str):
-    filepath = get_datapath(subdir="logs", filename=filename)
+    filepath = utils.get_datapath(subdir="logs", filename=filename)
     file_handler = logging.FileHandler(filepath, encoding='utf-8', mode='w')
     file_handler.setFormatter(logging.Formatter(
         '{asctime} {levelname} {name}: {message}',

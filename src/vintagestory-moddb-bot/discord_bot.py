@@ -11,7 +11,7 @@ from discord import Message, app_commands, Interaction, Forbidden
 from discord.app_commands import AppCommandError
 from discord.ext import commands, tasks
 
-from .api import api
+from . import api
 from .api.models import *
 from .subscription import SubscribedUser, SubscriptionManager
 
