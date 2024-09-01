@@ -1,0 +1,11 @@
+[Unit]
+Description="VintageStory ModDB Bot"
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/python3 -m vintagestory-moddb-bot
+Environment="DISCORD_TOKEN={your token here}"
+Environment="MY_DISCORD_USER_ID={your discord id here}"
+
+[Install]
+WantedBy=multi-user.target
