@@ -30,14 +30,9 @@ def send_notify(msg: str):
 
 
 def run(token: str, subs: SubscriptionManager):
-    while True:
-        try:
-            logger.info("Start")
-            _run_internal(token, subs)
-            logger.info("Stop")
-        except Exception as e:
-            logger.error(e.__str__())
-            logger.info("Re-running")
+    logger.info("Start")
+    _run_internal(token, subs)
+    logger.info("Stop")
 
 
 def _run_internal(token: str, subs: SubscriptionManager):
