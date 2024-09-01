@@ -9,19 +9,19 @@ from typing import List
 
 from dotenv import load_dotenv
 
-import discord_bot
+from .discord_bot import run as run_discord_bot, send_notify
 from .api import api
 from .api.models import *
-from logger import setup_logger
-from subscription import SubscriptionManager
-import utils
+from .logger import setup_logger
+from .subscription import SubscriptionManager
+from .utils import get_datapath
 
 logger = logging.getLogger("bot")
 
 
 class ModdbBot:
     def __init__(self, subs: SubscriptionManager):
-        self.filename = utils.get_datapath(subdir="data", filename="last_update_time.txt")
+        self.filename = get_datapath(subdir="data", filename="last_update_time.txt")
         self.mod_cache = dict[int, int]()
         self.last_update_time = self._load()
         self.current_time = self.utcnow()
@@ -55,7 +55,7 @@ class ModdbBot:
             self.tick()
             self.last_update_time = self.current_time
             self._save()
-            discord_bot.send_notify("Checked")
+            send_notify("Checked")
             logger.info("Sleep")
             time.sleep(60 * 5)
 
@@ -113,5 +113,5 @@ if __name__ == '__main__':
     setup_logger()
     token = os.getenv("DISCORD_TOKEN")
     subscription = SubscriptionManager()
-    threading.Thread(target=discord_bot.run, args=[token, subscription]).start()
+    threading.Thread(target=run_discord_bot, args=[token, subscription]).start()
     ModdbBot(subscription).run()
