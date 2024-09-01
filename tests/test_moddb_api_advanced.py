@@ -1,16 +1,15 @@
 import logging
 import unittest
 
-from moddb_bot.api import *
 from main import TestCase, HARD_MODE
 
-logger = logging.getLogger("test")
+logger = logging.getLogger("tests")
 
 
 class TestRequests(TestCase):
     @unittest.skipUnless(HARD_MODE, "Too large")
     def test_get_every_mod(self):
-        logger.info(f"Get every mod test")
+        logger.info(f"Get every mod tests")
         mods = get_mods()
         i = 0
         for mod in mods:

@@ -7,6 +7,7 @@ import threading
 import api
 import discord_bot
 from api.models import *
+import utils
 
 logger = logging.getLogger("subscription")
 
@@ -26,7 +27,7 @@ class SubscribedUser:
 
 class SubscriptionManager:
     def __init__(self):
-        self.filename = "../data/subscriptions.json"
+        self.filename = utils.get_datapath(subdir="data", filename="subscriptions.json")
         self.users_lock = threading.Lock()
         self.users = self._load()
         self._save()

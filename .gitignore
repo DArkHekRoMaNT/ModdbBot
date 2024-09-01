@@ -1,5 +1,5 @@
 .idea
 .venv
 .env
-logs
-data
+/dist
+*.egg-info/

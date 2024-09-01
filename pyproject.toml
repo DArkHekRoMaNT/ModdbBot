@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0", "discord>=2.3.2", "colorlog>=6.8.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vintagestory_moddb_bot"
+version = "1.0.0"
+authors = [
+  { name="DArkHekRoMaNT" },
+]
+description = "A simply Discord bot for VintageStory ModdDB notifications"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/DArkHekRoMaNT/ModdbBot"
+Issues = "https://github.com/DArkHekRoMaNT/ModdbBot/issues"

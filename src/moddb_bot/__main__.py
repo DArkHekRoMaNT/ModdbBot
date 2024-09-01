@@ -14,13 +14,14 @@ import discord_bot
 from api.models import *
 from logger import setup_logger
 from subscription import SubscriptionManager
+import utils
 
 logger = logging.getLogger("bot")
 
 
 class ModdbBot:
     def __init__(self, subs: SubscriptionManager):
-        self.filename = "../data/last_update_time.txt"
+        self.filename = utils.get_datapath(subdir="data", filename="last_update_time.txt")
         self.mod_cache = dict[int, int]()
         self.last_update_time = self._load()
         self.current_time = self.utcnow()
@@ -38,7 +39,7 @@ class ModdbBot:
             "trending_points": x.trending_points
         }) for x in api.get_mods()]
 
-        fn = "../data/mods.json"
+        fn = utils.get_datapath(subdir="data", filename="mods.json")
         os.makedirs(os.path.dirname(fn), exist_ok=True)
         with io.open(fn, "w", encoding="utf-8") as file:
             file.write(json.dumps(slim_data))

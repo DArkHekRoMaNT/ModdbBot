@@ -1,7 +1,5 @@
 from typing import List
 
-from moddb_bot.api import *
-from moddb_bot.api.models import *
 from main import TestCase
 
 
@@ -16,7 +14,7 @@ class TestRequests(TestCase):
 
         check(get_mods())
         check(get_mods(author_id=10))
-        check(get_mods(text="test"))
+        check(get_mods(text="tests"))
         check(get_mods(tag_ids=[1, 2]))
         check(get_mods(tag_ids=[-1]))
         check(get_mods(author_id=-1))

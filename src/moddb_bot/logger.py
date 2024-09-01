@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 
 import colorlog
+import utils
 
 
 def get_console_handler():
@@ -22,12 +23,9 @@ def get_console_handler():
     return console_handler
 
 
-def get_file_handler(path: str):
-    logs_dir = '../logs'
-    if not os.path.exists(logs_dir):
-        os.makedirs(logs_dir)
-
-    file_handler = logging.FileHandler(f'../logs/{path}', encoding='utf-8', mode='w')
+def get_file_handler(filename: str):
+    filepath = utils.get_datapath(subdir="logs", filename=filename)
+    file_handler = logging.FileHandler(filepath, encoding='utf-8', mode='w')
     file_handler.setFormatter(logging.Formatter(
         '{asctime} {levelname} {name}: {message}',
         datefmt='%H:%M:%S',
@@ -43,7 +41,7 @@ def setup_logger():
     log.addHandler(get_console_handler())
     log.addHandler(get_file_handler('latest.log'))
 
-    current_dt = datetime.now().strftime('%d-%m-%Y_%H-%M-%S')
+    current_dt = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     log.addHandler(get_file_handler(f'{current_dt}.log'))
 
     logging.TRACE = 5
