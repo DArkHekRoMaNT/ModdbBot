@@ -39,7 +39,7 @@ class ModdbBot:
             "trending_points": x.trending_points
         }) for x in api.get_mods()]
 
-        fn = utils.get_datapath(subdir="data", filename="mods.json")
+        fn = get_datapath(subdir="data", filename="mods.json")
         os.makedirs(os.path.dirname(fn), exist_ok=True)
         with io.open(fn, "w", encoding="utf-8") as file:
             file.write(json.dumps(slim_data))
