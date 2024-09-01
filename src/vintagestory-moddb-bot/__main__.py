@@ -9,9 +9,9 @@ from typing import List
 
 from dotenv import load_dotenv
 
-import api
 import discord_bot
-from api.models import *
+from .api import api
+from .api.models import *
 from logger import setup_logger
 from subscription import SubscriptionManager
 import utils
